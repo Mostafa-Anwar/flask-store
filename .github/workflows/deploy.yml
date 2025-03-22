@@ -9,6 +9,9 @@ on:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    env:
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      EKS_CLUSTER_NAME: ${{ vars.EKS_CLUSTER_NAME }}
     permissions:
       id-token: write
       contents: read
@@ -25,7 +28,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: ${{ secrets.aws_oidc_role }}
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: $AWS_REGION
       
       - name: Login to Amazon ECR
         id: login-ecr
@@ -42,7 +45,7 @@ jobs:
       
       - name: Update kubeconfig for EKS
         run: |
-          aws eks update-kubeconfig --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }}
+          aws eks update-kubeconfig --region $AWS_REGION --name $EKS_CLUSTER_NAME
 
       - name: Check cluster config
         run: kubectl get ns
