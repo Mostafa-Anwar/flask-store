@@ -7,6 +7,10 @@ This repo has the following:
 - K8s manifests
 - CICD (GH actions)
 
+## Architecture Diagram
+
+![Architecture Diagram](eks-architecture.png)
+
 ## Usage
 It can be used as blueprint is to create an EKS cluster and deploy a simple python app.
 
