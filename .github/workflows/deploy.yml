@@ -3,9 +3,8 @@ name: Deploy to EKS
 on:
   push:
     branches:
-      - main
-      - feat/cicd-pipeline
-
+      - master
+      
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
