@@ -2,10 +2,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-app   # <APP_NAME> more in the readme
+  name: flask-app   # <APP_NAME> please refer to the readme
   namespace: default  
   labels:
-    app: flask-app
+    app: flask-app  # <APP_NAME> please refer to the readme
     # app.kubernetes.io/name: "flask-store"
 spec:
   replicas: 2
@@ -22,23 +22,23 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: AccID.dkr.ecr.us-east-2.amazonaws.com/flask-app:v1   # <ECR_REGISTRY>/<ECR_REPOSITORY>:v1 more in the readme
+        image: AccID.dkr.ecr.us-east-2.amazonaws.com/flask-app:v1   # <ECR_REGISTRY>/<ECR_REPOSITORY>:v1 please refer to the readme
         ports:
-        - containerPort: 5000
+        - containerPort: 5000             # <CONTAINER_PORT> please refer to the readme
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: flask-app
+  name: flask-app      # <APP_NAME> please refer to the readme
   namespace: default
   labels:
-    app: flask-app
+    app: flask-app     # <APP_NAME> please refer to the readme
 spec:
   type: ClusterIP
   selector:
     app: flask-app
   ports:
     - name: http
-      port: 80
-      targetPort: 5000
+      port: 80            # <SERVICE_PORT> please refer to the readme
+      targetPort: 5000    # <TARGET_PORT>  please refer to the readme
       protocol: TCP

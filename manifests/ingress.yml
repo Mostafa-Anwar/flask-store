@@ -1,17 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: <APP_NAME>
+  name: <APP_NAME>  # please refer to the readme
   labels:
-    app: <APP_NAME>
+    app: <APP_NAME> # please refer to the readme
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/healthcheck-path: "/users"
-    alb.ingress.kubernetes.io/healthcheck-port: "5000"
+    alb.ingress.kubernetes.io/healthcheck-path: "/users"      # <HEALTHCHECK_PATH>  please refer to the readme
+    alb.ingress.kubernetes.io/healthcheck-port: "5000"        # <HEALTHCHECK_PORT>  please refer to the readme
     service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
 spec:
-  ingressClassName: alb
+  ingressClassName: alb    # <INGRESS_CLASS>  please refer to the readme
   rules:
     - http:
         paths:
