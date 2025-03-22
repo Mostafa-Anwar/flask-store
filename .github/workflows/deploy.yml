@@ -33,7 +33,7 @@ jobs:
       
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.ECR_REPOSITORY }}:latest -f flask-service/Dockerfile .
+          docker build -t ${{ secrets.ECR_REPOSITORY }}:latest -f flask-service/Dockerfile  flask-service
       
       - name: Tag and push Docker image
         run: |
