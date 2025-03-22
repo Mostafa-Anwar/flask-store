@@ -2,41 +2,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: <APP_NAME>
+  name: flask-app   # <APP_NAME> more in the readme
   namespace: default  
   labels:
-    app: <APP_NAME>
+    app: flask-app
     # app.kubernetes.io/name: "flask-store"
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: <APP_NAME>
+      app: flask-app
   template:
     metadata:
       labels:
-        app: <APP_NAME>
+        app: flask-app
       # annotations:
       #   app.kubernetes.io/name: "flask-store"
         # eks.amazonaws.com/fargate-profile: "default"
     spec:
       containers:
-      - name: <APP_NAME>
-        image: <ECR_REGISTRY>/<ECR_REPOSITORY>:v1
+      - name: flask-app
+        image: AccID.dkr.ecr.us-east-2.amazonaws.com/flask-app:v1   # <ECR_REGISTRY>/<ECR_REPOSITORY>:v1 more in the readme
         ports:
         - containerPort: 5000
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: <APP_NAME>
+  name: flask-app
   namespace: default
   labels:
-    app: <APP_NAME>
+    app: flask-app
 spec:
   type: ClusterIP
   selector:
-    app: <APP_NAME>
+    app: flask-app
   ports:
     - name: http
       port: 80
