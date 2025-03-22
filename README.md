@@ -104,13 +104,14 @@ Replace `<local-image-name>`, `<ECR_REGISTRY>`, `<ECR_REPOSITORY>`, and `<AWS_RE
    - **Trust Policy:** Update the role’s trust policy so that it can be assumed by the Kubernetes service account (e.g., `eks.amazonaws.com/role-arn` annotation).  
    - **Permissions Policy:** Attach the relevant policy that allows managing AWS load balancers (the AWS Load Balancer Controller policy).
 
-2. **Create a Service Account with the OIDC Role**  
-   In `ingress-service-account.yaml`
-
-3. Create ingress-controller ns
+2. **Create ingress-controller namespace**  
     `kubectl create ns ingress-controller`
 
-4. Install aws-load-balancer-controller to be used as ingress-controller
+3. **Create a Service Account with the OIDC Role**  
+   Make sure to modify <EKS_ALB_ROLE_ARN> with the role value before creation  
+   `kubectl create -f ingress-service-account.yaml`
+
+4. **Install aws-load-balancer-controller to be used as ingress-controller**
     ```bash 
         helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
         -n ingress-controller \
